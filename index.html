@@ -20,10 +20,26 @@
       .ui-btn-up-a {background: #fff; color: #f60;}
     </style>
     <body>
-        <label for="username">What is your Quora username (e.g. Christopher-J-Su)?</label>
-        <input cols="40" rows="8" name="username" id="username">
-        <button type="submit" id="b-cancel">Cancel</button>
-        <button type="submit" id="b-submit">Submit</button>
+        <div data-role="page" id="main">
+          <div data-role="header" class="jqm-header">
+            <h1>PebbleQuoraStats</h1>
+          </div>
+
+          <div data-role="content">
+            <div data-role="fieldcontain">
+              <label for="username" style="display: block; padding-bottom: 0.5em; width: 100%;">What is your Quora username (e.g. Christopher-J-Su)?</label>
+              <input name="username" id="username" style="color: #000; width: 100%;">
+            </div>
+
+            <div class="ui-body ui-body-b">
+              <fieldset class="ui-grid-a">
+                  <div class="ui-block-a"><button type="submit" data-theme="d" id="b-cancel">Cancel</button></div>
+                  <div class="ui-block-b"><button type="submit" data-theme="a" id="b-submit">Submit</button></div>
+                </fieldset>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <script>
             function saveOptions() {
