@@ -1,4 +1,63 @@
-<label for="username">What is your Quora username (e.g. Christopher-J-Su)?</label>
-<input cols="40" rows="8" name="username" id="username">
-<button type="submit" id="b-cancel">Cancel</button>
-<button type="submit" id="b-submit">Submit</button>
+<html>
+    <head><title>PebbleQuoraStats</title></head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+    <style type="text/css">
+      .ui-page {
+        background: #f60;
+        color: #fff;
+      }
+      .ui-bar-a {background: transparent; border: none; color: #fff; text-shadow: none;}
+      .ui-body-b {background: transparent; border: none;}
+      .ui-body-c {color: #fff; text-shadow: none;}
+      .ui-btn-up-d,
+      .ui-btn-hover-d,
+      .ui-btn-up-a,
+      .ui-btn-hover-a:hover {background: transparent; border: 1px solid #fff; box-shadow: none; color: #fff; font-weight: normal; text-transform: uppercase; text-shadow: none;}
+      .ui-btn-hover-d:hover,
+      .ui-btn-up-a {background: #fff; color: #f60;}
+    </style>
+    <body>
+        <label for="username">What is your Quora username (e.g. Christopher-J-Su)?</label>
+        <input cols="40" rows="8" name="username" id="username">
+        <button type="submit" id="b-cancel">Cancel</button>
+        <button type="submit" id="b-submit">Submit</button>
+
+        <script>
+            function saveOptions() {
+                var options = {
+                  'username': $("#username").val()
+                }
+                return options;
+              }
+
+              function getURLVariable(name) {
+                name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+                var regexS = "[\\?&]"+name+"=([^&#]*)",
+                    regex = new RegExp(regexS),
+                    results = regex.exec(window.location.href);
+                if (results == null) return "";
+                else return results[1];
+              }
+
+            $(document).ready(function() {
+                var priorSearch = getURLVariable('username');
+                priorSearch = decodeURI(priorSearch);
+
+                if (priorSearch) {
+                  $('#username').html(priorSearch);
+                }
+
+                $("#b-cancel").click(function() {
+                  document.location = "pebblejs://close";
+                });
+                $("#b-submit").click(function() {
+                  var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(saveOptions()));
+                  document.location = location;
+                });
+              });
+        </script>
+    </body>
+</html>
